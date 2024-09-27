@@ -18,21 +18,23 @@ public class AssignmentBrennan {
         int length;
         int width;
         int area;
-        System.out.printf("insert length of rectangle"); 
+        System.out.printf("insert length of rectangle: "); 
         length=sc.nextInt();
-        System.out.printf("insert width of rectangle");
+        System.out.printf("insert width of rectangle: ");
         width=sc.nextInt();
         area=length*width;
-        System.out.print("area is" + area);
+        System.out.printf("area is %d\n", area);
         
        
     
         // area of a circle
         double radius = 0;
         double area2;
-        System.out.printf("input radius");
+        System.out.printf("input radius: ");
+        radius = sc.nextDouble();
         area = (int) (Math.PI *radius*radius);
         System.out.printf("Area is: " + area);
+        area2 = sc.nextDouble();
     }
 
 }
