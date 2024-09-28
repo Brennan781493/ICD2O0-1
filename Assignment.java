@@ -46,13 +46,17 @@ public class AssignmentBrennan {
         System.out.printf("input height")
         height = sc.nextDouble(); 
         volume = (area3*height);    
+        System.out.printf("volume is: " + volume);
+        volume = sc.nextDouble();
 
-        int P;
+        int P = ofSeconds(seconds);
         int g = 9.8;
         int L;
         System.out.printf("length in meters: ");
         L = sc.nextInt();
-        P = (int) (Math.PI*2*sqrt(L/g))
+        P = (int) (Math.PI*2*sqrt(L/g));
+        System.out.printf("period of one pendulum swing: ")
+        P = sc.next int
     }
 
 }
