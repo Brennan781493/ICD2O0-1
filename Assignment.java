@@ -25,16 +25,34 @@ public class AssignmentBrennan {
         area=length*width;
         System.out.printf("area is %d\n", area);
         
-       
-    
         // area of a circle
         double radius = 0;
         double area2;
         System.out.printf("input radius: ");
         radius = sc.nextDouble();
         area = (int) (Math.PI *radius*radius);
-        System.out.printf("Area is: " + area);
+        System.out.printf("area is: " + area);
         area2 = sc.nextDouble();
+
+        double radius2;
+        double area3;
+        double height;
+        double volume;
+        System.out.printf("input radius: ");
+        radius2 = sc.nextDouble()
+        area = (int) (Math.PI *radius*radius);
+        system.out.printf("area is: ");
+        area3 = sc.nextDouble();
+        System.out.printf("input height")
+        height = sc.nextDouble(); 
+        volume = (area3*height);    
+
+        int P;
+        int g = 9.8;
+        int L;
+        System.out.printf("length in meters: ");
+        L = sc.nextInt();
+        P = (int) (Math.PI*2*sqrt(L/g))
     }
 
 }
