@@ -40,21 +40,20 @@ public class AssignmentBrennan {
         double volume;
         System.out.print("input radius: ");
         radius2 = sc.nextDouble();
-        area = (int) (Math.PI *radius*radius);
-        system.out.print("area is: ");
-        area3 = sc.nextDouble();
+        area3 = (int) (Math.PI *radius*radius);
         System.out.print("input height");
         height = sc.nextDouble(); 
         volume = (area3*height);    
         System.out.print("volume is: " + volume);
         volume = sc.nextDouble();
 
-        int P = ofSeconds(seconds);
-        int g = 9.8;
+        int P;
+        int g ;
         int L;
         System.out.print("length in meters: ");
         L = sc.nextInt();
-        P = (int) (Math.PI*2*sqrt(L/g));
-        System.out.print("period of one pendulum swing: ");
+        P = (Math.PI*2*method.sqrt(L/g));
+        System.out.print("period of one pendulum swing: " + P);
         P = sc.nextInt();
     }
+}
