@@ -51,7 +51,7 @@ public class AssignmentBrennan {
 
         int P = ofSeconds(seconds);
         int g = 9.8;
-        int L;
+        int L = ofMeters(meters);
         System.out.printf("length in meters: ");
         L = sc.nextInt();
         P = (int) (Math.PI*2*sqrt(L/g));
