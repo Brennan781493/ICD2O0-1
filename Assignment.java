@@ -56,7 +56,7 @@ public class AssignmentBrennan {
         L = sc.nextInt();
         P = (int) (Math.PI*2*sqrt(L/g));
         System.out.printf("period of one pendulum swing: ")
-        P = sc.next int
+        P = sc.next int();
     }
 
 }
