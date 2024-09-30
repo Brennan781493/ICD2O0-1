@@ -48,7 +48,7 @@ public class AssignmentBrennan {
         volume = sc.nextDouble();
 
         int P;
-        int g ;
+        int g = 9.8;
         int L;
         System.out.print("length in meters: ");
         L = sc.nextInt();
