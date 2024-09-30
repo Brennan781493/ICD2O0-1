@@ -2,10 +2,13 @@ package assignment.brennan;
 import java.lang.Math;
 import java.util.Scanner;
 
-/**
- *
- * @author 781493
- */
+/*
+Brennan Ho 781493
+Date: 30, September, 2024
+Course: Grade 10 Comp Sci
+Title: area/volume calculator
+Description: a program that calculates the area and volume of different shapes.
+*/
 public class AssignmentBrennan {
 
     /**
@@ -15,45 +18,49 @@ public class AssignmentBrennan {
   // TODO code application logic here
         
         Scanner sc = new Scanner(System.in);
-        int length;
-        int width;
-        int area;
-        System.out.printf("insert length of rectangle: "); 
+        double length;
+        double width;
+        double area;
+        System.out.print("I will now calculate the area or your rectangle");
+        System.out.printf("\ninsert length of rectangle: "); 
         length=sc.nextInt();
         System.out.printf("insert width of rectangle: ");
         width=sc.nextInt();
         area=length*width;
-        System.out.printf("area is %d\n", area);
-        
+        System.out.printf("area is %.2f", area);
+       
         // area of a circle
         double radius = 0;
         double area2;
-        System.out.print("input radius: ");
+        System.out.print("\nI will now calculate the area or your circle");
+        System.out.printf("\n input radius: ");
         radius = sc.nextDouble();
-        area = (int) (Math.PI *radius*radius);
-        System.out.print("area is: " + area);
-        area2 = sc.nextDouble();
+        area = (Math.PI *radius*radius);
+        System.out.printf("area is: %.2f", area);
+       
 
         double radius2;
         double area3;
         double height;
         double volume;
-        System.out.print("input radius: ");
+        System.out.print("\nI will now calculate the volume of your cylinder");
+        System.out.printf("\n input radius: ");
         radius2 = sc.nextDouble();
-        area3 = (int) (Math.PI *radius*radius);
-        System.out.print("input height");
+        area3 = (Math.PI *radius*radius);
+        System.out.printf("input height: " );
         height = sc.nextDouble(); 
         volume = (area3*height);    
-        System.out.print("volume is: " + volume);
-        volume = sc.nextDouble();
+        System.out.printf("volume is: %.2f ", volume);
+      
 
-        int P;
-        int g = 9.8;
-        int L;
-        System.out.print("length in meters: ");
-        L = sc.nextInt();
-        P = (Math.PI*2*method.sqrt(L/g));
-        System.out.print("period of one pendulum swing: " + P);
-        P = sc.nextInt();
+        double P;
+        double g = 9.8;
+        double L;
+        System.out.print("\nI will now calculate the time it takes for your pendulum to make one back and forth swing");
+        System.out.printf("\n  insert pendulum length in meters: ");
+        L = sc.nextDouble();
+        P = (Math.PI*Math.sqrt(L/g)*2.);
+        System.out.printf("period of one pendulum swing: %.2f ", P);
+        
     }
 }
