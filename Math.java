@@ -4,7 +4,7 @@ public class equals {
     int amount = 24;
     System.out.println(amount);
     System.out.println("Two dozen is: " + amount);
-    int amount1 = 7 * 4;
-    System.out.println("Twenty-eight is: " + amount1);
+    int amount2 = 7 * 4;
+    System.out.println("Twenty-eight is: " + amount2);
     }
 }
