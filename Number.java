@@ -1,6 +1,6 @@
 class number {
   public static void main(String[] args) {
-        int numberOfKeys = 102;
+        int StepsInADay = 10,000;
         System.out.println("The number of keys on a keyboard is " + numberOfKeys);
     }
 }
