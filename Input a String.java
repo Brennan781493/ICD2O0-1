@@ -11,7 +11,7 @@ class Main {
     kbd.nextLine();
     System.out.printf("You said: %s.\n", greeting);
     System.out.print("Hi. Please enter a greeting in more than one word: ");
-    greetings = kbd.next();
-    System.out.printf("\nYou said: ", greetings);
+    greetings = kbd.nextLine();
+    System.out.printf("You said: %s.\n", greetings);
   }
 }
