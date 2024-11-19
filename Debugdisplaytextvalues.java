@@ -1,5 +1,5 @@
 class Main {
-  public static void main(String[] args) {
+  public static void Debugdisplaytextvalues(String[] args) {
     // Make any needed corrections to the code below until it runs
     // without errors.
 
