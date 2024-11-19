@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.math.BigInteger;
 
-public class Factorials and Loops. {
+public class Unit6L5 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
