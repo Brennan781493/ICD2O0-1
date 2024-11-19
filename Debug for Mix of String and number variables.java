@@ -1,5 +1,5 @@
 class Main {
-  public static void main(String[] args) {
+  public static void DebugforMixofStringandnumbervariables(String[] args) {
 
     // declare variables to store the type of transport and the number of wheels
     String transport = "unicycle";
