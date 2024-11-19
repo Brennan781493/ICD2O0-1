@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ASimpleConsoleCalculator {
+public class Unit6L2 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
