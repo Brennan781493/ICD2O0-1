@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Main {
+class Unit6L1 {
  public static void main(String[] args) {
    Scanner sc = new Scanner(System.in);
    System.out.print("Please enter the probability of precipitation (0 to 1): ");
