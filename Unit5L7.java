@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class IntegerInputExample{
+public class Unit5L7{
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
        
