@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-class MakingAMenu {
+class Unit6L6 {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         String choice = "";
