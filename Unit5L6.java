@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Main {
+class Unit5L6 {
   public static void main(String[] args) {
     Scanner kbd = new Scanner(System.in);
     String greeting = new String();
