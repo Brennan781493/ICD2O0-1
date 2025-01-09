@@ -32,14 +32,17 @@ public class Assignment3 {
             System.out.println("Computer chose: " + computerChoice);
 
             // Compare choices to determine the outcome
+            //if the player choice is the same as the computer than it's a tie
             if (playerChoice == computerChoice) {
                 System.out.println("It's a tie!");
                 ties++;
+                //these results mean the player won.
             } else if ((playerChoice == 'r' && computerChoice == 's') ||
                        (playerChoice == 'p' && computerChoice == 'r') ||
                        (playerChoice == 's' && computerChoice == 'p')) {
                 System.out.println("You win this round!");
                 playerWins++;
+                //this states that any other result is a win for the computer
             } else {
                 System.out.println("Computer wins this round!");
                 computerWins++;
