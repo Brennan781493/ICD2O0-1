@@ -1,65 +1,57 @@
-import java.util.Scanner; // Import the Scanner class for user input
+import java.util.Scanner;
 
-public class RockPaperScissors {
+public class Assignment3 {
     public static void main(String[] args) {
-        // Create a Scanner object to read input from the user
         Scanner scanner = new Scanner(System.in);
-        
-        // Prompt the user for the number of games they want to play
-        System.out.print("How many games would you like to play? ");
-        int totalGames = scanner.nextInt(); // Read the number of games
-        scanner.nextLine(); // Consume the newline character left by nextInt()
-        
-        // Initialize counters for wins, losses, and ties
-        int playerWins = 0; 
-        int computerWins = 0; 
-        int ties = 0;
 
-        // Loop for the number of games the player wants to play
+        // Initialize counters for wins, losses, and ties
+        int playerWins = 0, computerWins = 0, ties = 0;
+
+        // Prompt the user for the number of games
+        System.out.print("How many games would you like to play? ");
+        int totalGames = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
         for (int i = 0; i < totalGames; i++) {
-            // Prompt the user to input their choice (r, p, or s)
+            // Get the player's choice
             System.out.print("Enter your choice (r for rock, p for paper, s for scissors): ");
-            char playerChoice = scanner.nextLine().toLowerCase().charAt(0); // Read and convert to lowercase
-            
-            // Generate the computer's random choice (0, 1, or 2)
-            int computerRandom = (int) (3 * Math.random()); // Randomly generates 0, 1, or 2
-            char computerChoice; // Variable to store the computer's choice
-            
-            // Map random numbers to 'r', 'p', or 's' for the computer
-            if (computerRandom == 0) {
-                computerChoice = 'r'; // 0 corresponds to rock
-            } else if (computerRandom == 1) {
-                computerChoice = 'p'; // 1 corresponds to paper
-            } else {
-                computerChoice = 's'; // 2 corresponds to scissors
+            char playerChoice = scanner.nextLine().toLowerCase().charAt(0);
+
+            // Generate the computer's choice
+            int randomChoice = (int) (3 * Math.random());
+            char computerChoice = ' ';
+            if (randomChoice == 0) {
+                computerChoice = 'r'; // Rock
+            } else if (randomChoice == 1) {
+                computerChoice = 'p'; // Paper
+            } else if (randomChoice == 2) {
+                computerChoice = 's'; // Scissors
             }
 
             // Display the computer's choice
             System.out.println("Computer chose: " + computerChoice);
 
-            // Compare the player's choice with the computer's choice to determine the outcome
+            // Compare choices to determine the outcome
             if (playerChoice == computerChoice) {
-                System.out.println("It's a tie!"); // If choices are the same, it's a tie
-                ties++; // Increment the tie counter
-            } else if ((playerChoice == 'r' && computerChoice == 's') || 
-                       (playerChoice == 'p' && computerChoice == 'r') || 
+                System.out.println("It's a tie!");
+                ties++;
+            } else if ((playerChoice == 'r' && computerChoice == 's') ||
+                       (playerChoice == 'p' && computerChoice == 'r') ||
                        (playerChoice == 's' && computerChoice == 'p')) {
-                System.out.println("You win this round!"); // Player wins based on rules
-                playerWins++; // Increment the player win counter
+                System.out.println("You win this round!");
+                playerWins++;
             } else {
-                System.out.println("Computer wins this round!"); // Computer wins otherwise
-                computerWins++; // Increment the computer win counter
+                System.out.println("Computer wins this round!");
+                computerWins++;
             }
         }
 
-        // Display the final results after all games are played
+        // Print the final results
         System.out.println("\nGame Over!");
-        System.out.println("Total games played: " + totalGames); // Total games played
-        System.out.println("Player wins: " + playerWins); // Total games player won
-        System.out.println("Computer wins: " + computerWins); // Total games computer won
-        System.out.println("Ties: " + ties); // Total games that ended in a tie
+        System.out.println("Player wins: " + playerWins);
+        System.out.println("Computer wins: " + computerWins);
+        System.out.println("Ties: " + ties);
 
-        // Close the scanner to release resources
         scanner.close();
     }
 }
