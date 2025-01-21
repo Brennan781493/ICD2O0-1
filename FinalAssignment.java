@@ -1,85 +1,108 @@
-package pkgfinal; // Package declaration
+package pkgfinal; // Define package for organization
 
-import java.util.Scanner; // Importing Scanner for input handling
-import java.io.File; // Importing File to read from a file
+import java.util.Scanner; // Import Scanner for user input
+import java.io.File; // Import File to handle file reading
 
-public class Final { // Main class definition
-
-    // Basic function to calculate the final balance
-    public static double calculateFinalBalance(double initialBalance, double purchaseAmount, double paymentAmount) {
-        // Calculate final balance based on initial balance, purchase amount, and payment amount
-        return (initialBalance - paymentAmount) + purchaseAmount; // Return the calculated final balance
+public class Final { // Main class declaration
+    
+    /*
+Brennan Ho 781493
+Date: January 21 2025
+Course: Grade 10 Comp Sci
+Title: Credit Card Assignment 
+Description:determines the balance of diffrent credit cards
+VARIABLE DICTIONARY: 
+ 	filePath (String): Stores the file path to the ledger file containing customer data.
+	customerCount (int): Tracks the total number of customers processed from the file.
+	totalBalance (double): Accumulates the sum of all final balances for calculating the average balance.
+	maxBalance (double): Tracks the highest final balance among all customers.
+	minBalance (double): Tracks the lowest final balance among all customers.
+	accountWithMaxBalance (String): Stores the account ID of the customer with the highest final balance.
+	accountWithMinBalance (String): Stores the account ID of the customer with the lowest final balance.
+	ledgerFile (File): Represents the ledger file as a File object for reading customer data.
+	fileReader (Scanner): Reads the content of the ledger file line by line.
+	record (String): Stores the current line being read from the ledger file.
+	recordScanner (Scanner): Parses the individual data fields (account ID, balances, etc.) from a line in the file.
+	accountID (String): Stores the unique identifier of the customer account.
+	startingBalance (double): Represents the initial balance of the customer’s account before transactions.
+	totalPurchases (double): Represents the total amount of purchases made by the customer.
+	totalPayments (double): Represents the total amount of payments made by the customer.
+	finalBalance (double): Stores the computed final balance for the customer after transactions.
+	averageBalance (double): Stores the average final balance calculated for all customers.
+	ex (Exception): Catches and stores exceptions that occur during file reading or line processing.
+    */
+    
+// Function to compute the updated balance
+    public static double computeUpdatedBalance(double startingBalance, double totalPurchases, double totalPayments) {
+        // Calculate the updated balance
+        return (startingBalance - totalPayments) + totalPurchases;
     }
 
-    public static void main(String[] args) { // Main method
-        String ledgerFilePath = "C:\\Users\\781493\\OneDrive - Peel District School Board\\Documents\\NetBeansProjects\\Final\\src\\pkgfinal\\ledger.dat";
-        // Define the file path for the ledger
+    public static void main(String[] args) { // Entry point of the program
+        String filePath = "C:\\Users\\781493\\OneDrive - Peel District School Board\\Documents\\NetBeansProjects\\Final\\src\\pkgfinal\\ledger.dat";
+        // File path pointing to the ledger file
 
-        // Initialize variables for customer count and balance calculations
-        int totalCustomers = 0; // Count of customers processed
-        double cumulativeBalance = 0; // Total balance of all customers
-        double highestBalance = Double.MIN_VALUE; // Initialize highest balance to the smallest possible value
-        double lowestBalance = Double.MAX_VALUE; // Initialize lowest balance to the largest possible value
-        String accountWithHighestBalance = ""; // Account number with the highest balance
-        String accountWithLowestBalance = ""; // Account number with the lowest balance
+        // Variables for customer statistics
+        int customerCount = 0; // Tracks number of customers processed
+        double totalBalance = 0; // Cumulative sum of all final balances
+        double maxBalance = Double.MIN_VALUE; // Tracks the highest balance
+        double minBalance = Double.MAX_VALUE; // Tracks the lowest balance
+        String accountWithMaxBalance = ""; // Stores account number with the highest balance
+        String accountWithMinBalance = ""; // Stores account number with the lowest balance
 
-        // Create a File object for the ledger
-        File ledgerFile = new File(ledgerFilePath); // Create a File object using the specified file path
+        // Create a file object for the ledger
+        File ledgerFile = new File(filePath); // Create a file object for the specified path
 
-        // Attempt to read the file regardless of its existence
-        try (Scanner fileScanner = new Scanner(ledgerFile)) { // Create a Scanner to read the file
-            // Reading each line (each customer's data)
-            while (fileScanner.hasNextLine()) { // Loop while there are more lines in the file
-                String line = fileScanner.nextLine(); // Read the next line from the file
+        // Try to read the file and process its content
+        try (Scanner fileReader = new Scanner(ledgerFile)) { // Scanner for file reading
+            while (fileReader.hasNextLine()) { // Loop through each line in the file
+                String record = fileReader.nextLine(); // Read the current line
 
-                try (Scanner lineScanner = new Scanner(line)) { // Create a Scanner for the current line
-                    lineScanner.useDelimiter("\\s+"); // Set the delimiter to whitespace
+                try (Scanner recordScanner = new Scanner(record)) { // Scanner for processing individual record
+                    recordScanner.useDelimiter("\\s+"); // Define delimiter as whitespace
 
-                    // Read customer data
-                    String accountNumber = lineScanner.next().trim(); // Read the account number and trim whitespace
-                    double initialBalance = lineScanner.nextDouble(); // Read the initial balance
-                    double purchaseAmount = lineScanner.nextDouble(); // Read the purchase amount
-                    double paymentAmount = lineScanner.nextDouble(); // Read the payment amount
+                    // Parse account details
+                    String accountID = recordScanner.next().trim(); // Read account ID
+                    double openingBalance = recordScanner.nextDouble(); // Read initial balance
+                    double purchases = recordScanner.nextDouble(); // Read total purchases
+                    double payments = recordScanner.nextDouble(); // Read total payments
 
-                    // Calculate the final balance using the basic function
-                    double computedFinalBalance = calculateFinalBalance(initialBalance, purchaseAmount, paymentAmount); // Call the function to calculate final balance
+                    // Calculate the final balance
+                    double finalBalance = computeUpdatedBalance(openingBalance, purchases, payments);
 
-                    // Update cumulative balance and customer count
-                    cumulativeBalance += computedFinalBalance; // Add final balance to cumulative balance
-                    totalCustomers++; // Increment the customer count
+                    // Update cumulative statistics
+                    totalBalance += finalBalance; // Add to total balance
+                    customerCount++; // Increment the customer counter
 
-                    // Update highest and lowest balances
-                    if (computedFinalBalance > highestBalance) { // Check if the final balance is greater than the current highest
-                        highestBalance = computedFinalBalance; // Update highest balance
-                        accountWithHighestBalance = accountNumber; // Update account number for highest balance
+                    // Check for new highest or lowest balance
+                    if (finalBalance > maxBalance) { // If the balance is the new maximum
+                        maxBalance = finalBalance; // Update max balance
+                        accountWithMaxBalance = accountID; // Update corresponding account ID
                     }
-                    if (computedFinalBalance < lowestBalance) { // Check if the final balance is less than the current lowest
-                        lowestBalance = computedFinalBalance; // Update lowest balance
-                        accountWithLowestBalance = accountNumber; // Update account number for lowest balance
+                    if (finalBalance < minBalance) { // If the balance is the new minimum
+                        minBalance = finalBalance; // Update min balance
+                        accountWithMinBalance = accountID; // Update corresponding account ID
                     }
 
-                    // Print account details
-                    System.out.printf("Account: %s | Final Balance: %.2f\n", accountNumber, computedFinalBalance); // Print account info
-                } catch (Exception e) { // Catch any exceptions that occur while processing the line
-                    System.out.println("Error processing line: " + line); // Print error message for the line
+                    // Display account details
+                    System.out.printf("Account: %s | Final Balance: %.2f\n", accountID, finalBalance);
+                } catch (Exception ex) { // Handle errors in processing a single record
+                    System.out.println("Error processing record: " + record); // Print error details
                 }
             }
 
-            // Check if any customers were processed
-            if (totalCustomers > 0) { // If at least one customer was processed
-                // Calculate and display summary
-                double averageBalance = cumulativeBalance / totalCustomers; // Calculate average balance
-                System.out.printf("\nAverage Balance: %.2f\n", averageBalance); // Print average balance
-                System.out.printf("Account with highest balance: %s | Final Balance: %.2f\n", accountWithHighestBalance, highestBalance); // Print highest balance account
-                System.out.printf("Account with lowest balance: %s | Final Balance: %.2f\n", accountWithLowestBalance, lowestBalance); // Print lowest balance account
-            } else { // If no customers were processed (totalCustomers is 0)
-                System.out.println("No valid data found in the file."); // Print message indicating no valid data was found
-            } // End of the else block
+            // If customers were processed, calculate and display summary
+            if (customerCount > 0) {
+                double averageBalance = totalBalance / customerCount; // Calculate average balance
+                System.out.printf("\nAverage Balance: %.2f\n", averageBalance); // Display average balance
+                System.out.printf("Account with Highest Balance: %s | Final Balance: %.2f\n", accountWithMaxBalance, maxBalance); // Display account with highest balance
+                System.out.printf("Account with Lowest Balance: %s | Final Balance: %.2f\n", accountWithMinBalance, minBalance); // Display account with lowest balance
+            } else { // No valid customer data found
+                System.out.println("No valid data found in the file.");
+            }
 
-        } catch (Exception e) { // Catch any exceptions that occur during file processing
-            // Print error message along with the exception message for debugging
-            System.out.println("An error occurred while processing the file: " + e.getMessage()); // Print error message
-        } // End of the catch block
-
-    } // End of the main method
-} // End of the Main class
+        } catch (Exception ex) { // Handle file reading errors
+            System.out.println("An error occurred while reading the file: " + ex.getMessage()); // Display error message
+        }
+    }
+}
