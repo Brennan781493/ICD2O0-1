@@ -1,81 +1,85 @@
-package Creditrivercredit;
+package pkgfinal; // Package declaration
 
 import java.util.Scanner; // Importing Scanner for input handling
 import java.io.File; // Importing File to read from a file
 
-public class Creditrivercredit {
+public class Final { // Main class definition
 
     // Basic function to calculate the final balance
-    public static double calculateFinalBalance(double startingBalance, double purchase, double payment) {
-        return (startingBalance - payment) + purchase;
+    public static double calculateFinalBalance(double initialBalance, double purchaseAmount, double paymentAmount) {
+        // Calculate final balance based on initial balance, purchase amount, and payment amount
+        return (initialBalance - paymentAmount) + purchaseAmount; // Return the calculated final balance
     }
 
-    public static void main(String[] args) {
-        String filePath = "ledger.dat";
+    public static void main(String[] args) { // Main method
+        String ledgerFilePath = "C:\\Users\\781493\\OneDrive - Peel District School Board\\Documents\\NetBeansProjects\\Final\\src\\pkgfinal\\ledger.dat";
+        // Define the file path for the ledger
 
-        int customerCount = 0;
-        double totalBalance = 0;
-        double maxBalance = Double.MIN_VALUE;
-        double minBalance = Double.MAX_VALUE;
-        String maxAccount = "";
-        String minAccount = "";
+        // Initialize variables for customer count and balance calculations
+        int totalCustomers = 0; // Count of customers processed
+        double cumulativeBalance = 0; // Total balance of all customers
+        double highestBalance = Double.MIN_VALUE; // Initialize highest balance to the smallest possible value
+        double lowestBalance = Double.MAX_VALUE; // Initialize lowest balance to the largest possible value
+        String accountWithHighestBalance = ""; // Account number with the highest balance
+        String accountWithLowestBalance = ""; // Account number with the lowest balance
 
-        // File existence check and error message
-        File ledgerFile = new File(filePath);
-        if (!ledgerFile.exists()) {
-            System.out.println("Error: The required file '" + filePath + "' was not found.");
-            System.out.println("Note: This program requires no user input. Please ensure the file is in the correct path.");
-            return; // Exit the program
-        }
+        // Create a File object for the ledger
+        File ledgerFile = new File(ledgerFilePath); // Create a File object using the specified file path
 
-        try (Scanner fileScanner = new Scanner(filepath)) {
+        // Attempt to read the file regardless of its existence
+        try (Scanner fileScanner = new Scanner(ledgerFile)) { // Create a Scanner to read the file
             // Reading each line (each customer's data)
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
+            while (fileScanner.hasNextLine()) { // Loop while there are more lines in the file
+                String line = fileScanner.nextLine(); // Read the next line from the file
 
-                try (Scanner lineScanner = new Scanner(line)) {
-                    lineScanner.useDelimiter(",");
+                try (Scanner lineScanner = new Scanner(line)) { // Create a Scanner for the current line
+                    lineScanner.useDelimiter("\\s+"); // Set the delimiter to whitespace
 
                     // Read customer data
-                    String accountNumber = lineScanner.next().trim();
-                    double startingBalance = lineScanner.nextDouble();
-                    double purchase = lineScanner.nextDouble();
-                    double payment = lineScanner.nextDouble();
+                    String accountNumber = lineScanner.next().trim(); // Read the account number and trim whitespace
+                    double initialBalance = lineScanner.nextDouble(); // Read the initial balance
+                    double purchaseAmount = lineScanner.nextDouble(); // Read the purchase amount
+                    double paymentAmount = lineScanner.nextDouble(); // Read the payment amount
 
                     // Calculate the final balance using the basic function
-                    double finalBalance = calculateFinalBalance(startingBalance, purchase, payment);
+                    double computedFinalBalance = calculateFinalBalance(initialBalance, purchaseAmount, paymentAmount); // Call the function to calculate final balance
 
-                    totalBalance += finalBalance;
-                    customerCount++;
+                    // Update cumulative balance and customer count
+                    cumulativeBalance += computedFinalBalance; // Add final balance to cumulative balance
+                    totalCustomers++; // Increment the customer count
 
-                    // Update max and min balances
-                    if (finalBalance > maxBalance) {
-                        maxBalance = finalBalance;
-                        maxAccount = accountNumber;
+                    // Update highest and lowest balances
+                    if (computedFinalBalance > highestBalance) { // Check if the final balance is greater than the current highest
+                        highestBalance = computedFinalBalance; // Update highest balance
+                        accountWithHighestBalance = accountNumber; // Update account number for highest balance
                     }
-                    if (finalBalance < minBalance) {
-                        minBalance = finalBalance;
-                        minAccount = accountNumber;
+                    if (computedFinalBalance < lowestBalance) { // Check if the final balance is less than the current lowest
+                        lowestBalance = computedFinalBalance; // Update lowest balance
+                        accountWithLowestBalance = accountNumber; // Update account number for lowest balance
                     }
 
                     // Print account details
-                    System.out.printf("Account: %s | Final Balance: %.2f\n", accountNumber, finalBalance);
-                } catch (Exception e) {
-                    System.out.println("Error processing line: " + line);
+                    System.out.printf("Account: %s | Final Balance: %.2f\n", accountNumber, computedFinalBalance); // Print account info
+                } catch (Exception e) { // Catch any exceptions that occur while processing the line
+                    System.out.println("Error processing line: " + line); // Print error message for the line
                 }
             }
 
-            if (customerCount > 0) {
+            // Check if any customers were processed
+            if (totalCustomers > 0) { // If at least one customer was processed
                 // Calculate and display summary
-                double averageBalance = totalBalance / customerCount;
-                System.out.printf("\nAverage Balance: %.2f\n", averageBalance);
-                System.out.printf("Account with highest balance: %s | Final Balance: %.2f\n", maxAccount, maxBalance);
-                System.out.printf("Account with lowest balance: %s | Final Balance: %.2f\n", minAccount, minBalance);
-            } else {
-                System.out.println("No valid data found in the file.");
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred while processing the file.");
-        }
-    }
-}
+                double averageBalance = cumulativeBalance / totalCustomers; // Calculate average balance
+                System.out.printf("\nAverage Balance: %.2f\n", averageBalance); // Print average balance
+                System.out.printf("Account with highest balance: %s | Final Balance: %.2f\n", accountWithHighestBalance, highestBalance); // Print highest balance account
+                System.out.printf("Account with lowest balance: %s | Final Balance: %.2f\n", accountWithLowestBalance, lowestBalance); // Print lowest balance account
+            } else { // If no customers were processed (totalCustomers is 0)
+                System.out.println("No valid data found in the file."); // Print message indicating no valid data was found
+            } // End of the else block
+
+        } catch (Exception e) { // Catch any exceptions that occur during file processing
+            // Print error message along with the exception message for debugging
+            System.out.println("An error occurred while processing the file: " + e.getMessage()); // Print error message
+        } // End of the catch block
+
+    } // End of the main method
+} // End of the Main class
